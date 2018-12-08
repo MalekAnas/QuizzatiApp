@@ -1,24 +1,34 @@
 package QuizComponents;
 
 
+import Subject.Subject;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Question {
-    public int id;
+    public String id;
     public String text;
     public ArrayList<Option> optionList = new ArrayList<>();
+    public Subject subject;
     public  int quizId;
 
+    Random random = new Random();
 
     public Question() {
     }
 
 
-    public Question(int id, String text, ArrayList<Option> optionList, int quizId) {
-        this.id = id;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+
+    public Question(String text, ArrayList<Option> optionList, Subject subject) {
+        this.id = String.format("%04d", random.nextInt(10000));
         this.text = text;
         this.optionList = optionList;
-        this.quizId = quizId;
+        this.subject = subject;
     }
 
 
@@ -32,7 +42,7 @@ public class Question {
     ///Getters
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -52,9 +62,7 @@ public class Question {
     ///Setters
 
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setText(String text) {
         this.text = text;

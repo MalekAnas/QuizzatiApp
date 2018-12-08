@@ -1,39 +1,29 @@
 package Subject;
 
-public class Subject {
+import java.io.Serializable;
+import java.util.Random;
 
-    public int id;
+public class Subject implements Serializable {
+
+    public String id;
     public String subjectName;
+    Random random = new Random();
 
 
 
     public Subject() {
     }
 
-    public Subject(int id, String subjectName) {
-        this.id = id ;
+    public Subject(String id, String subjectName) {
+        this.id = String.format("%04d", random.nextInt(10000));
         this.subjectName = subjectName;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     ///Getters
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -48,11 +38,21 @@ public class Subject {
     ///Setters
 
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
     }
+
+
+
+
+    //To string methods
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", subjectName='" + subjectName + '\'' +
+                '}';
+    }
+
 }

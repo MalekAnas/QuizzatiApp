@@ -7,7 +7,7 @@ public class User implements Serializable {
 
     public String firstName;
     public String lastName;
-    private String password;
+    protected String password;
     private UUID uniqueID = UUID.randomUUID();
     public String id = String.valueOf(uniqueID);
     public String eMail;
@@ -23,7 +23,6 @@ public class User implements Serializable {
         this.id = String.valueOf(UUID.randomUUID());
         this.eMail = eMail;
     }
-
 
     ///Getters
     public String getFirstName() {
@@ -67,8 +66,8 @@ public class User implements Serializable {
 
     ///ToString Method to show basic info of the User
     public String printBasicInfo() {
-        return "\t\t\t\t\t\tUser info\n" + "Name: " + firstName + " " + "\n" +
-                "ID : " + id;
+        return "\t\t\t\t\t\tUser info\n" + "Name: " + firstName + " " + "\n" +"Last Name: "+lastName+ "\n" +
+                "ID : " + id + "\n" + "Email: " + ":" + eMail + "\n" + "Password: " + password ;
 
     }
 }

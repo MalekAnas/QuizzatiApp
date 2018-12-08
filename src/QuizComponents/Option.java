@@ -1,18 +1,25 @@
 package QuizComponents;
 
+import java.util.Random;
+
 public class Option {
 
-    public int id;
+
+    public String id;
     public String text;
     public boolean correct;
-    public int questionId;
+    public String questionId;
 
+    Random random = new Random();
 
     public Option() {
     }
 
-    public Option(int id, String text, boolean correct, int questionId) {
-        this.id = id;
+    public Option(String text, boolean correct, String questionId) {
+
+
+        this.id = String.format("%04d", random.nextInt(10000));
+
         this.text = text;
         this.correct = correct;
         this.questionId = questionId;
@@ -28,9 +35,12 @@ public class Option {
 
 
 
+
+
     ///Getters
 
-    public int getId() {
+
+    public String getId() {
         return id;
     }
 
@@ -42,7 +52,7 @@ public class Option {
         return correct;
     }
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 
@@ -51,9 +61,7 @@ public class Option {
 
     ///Setters
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setText(String text) {
         this.text = text;
@@ -63,7 +71,7 @@ public class Option {
         this.correct = correct;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 }

@@ -14,7 +14,7 @@ public class Menu {
 
         Menu menu = new Menu();
         menu.printFirstMenu();
-        menu.printSignedUserMenu();
+        menu.printSignedStudentMenu();
         menu.printStartQuizMenu();
     }
 
@@ -82,13 +82,40 @@ public class Menu {
 
 
     //printing signed In Users' menu
-    public void printSignedUserMenu() {
-        System.out.println("1) Veiw Subjects.");
-        System.out.println("2) Start a quiz.");
-        System.out.println("3) Veiw my score.");
+    public void printSignedStudentMenu() {
+
+        System.out.println("1) Start a quiz.");
+        System.out.println("2) Veiw my score.");
         System.out.println("--------------------------------------------------------\n\n");
 
     }
+
+
+    public void printSignedTeacherMenu(){
+        System.out.println("1)Create a new Subject.");
+        System.out.println("2)Add questions to a subject.");
+        System.out.println("3)View a student's record.");
+        System.out.println("--------------------------------------------------------\n\n");
+    }
+
+    public String creatSubjectGetName(){
+        String subjectName;
+        System.out.println("Enter the Subject name:");
+        subjectName = readIn.nextLine();
+
+        return subjectName;
+
+    }
+
+
+
+    public String creatSubjectGetId(){
+        System.out.println("Enter a unique ID for this Subject(Numbers only): ");
+
+        String subjectID = readIn.nextLine();
+        return subjectID;
+    }
+
 
 
     //print SignUp menu

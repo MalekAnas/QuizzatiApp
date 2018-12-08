@@ -19,8 +19,7 @@ public class UserList implements Serializable {
     //check if email is already exist in the userlist
     public boolean isEmailExist(String email){
 
-        for (User user :
-                UsersList) {
+        for (User user : UsersList) {
             if (user.geteMail().equals(email)){
                 isExist = true;
             }
@@ -61,11 +60,15 @@ public class UserList implements Serializable {
             try {
                 theUser = findUserByMail(email);
 
-                for (User user : UsersList) {
-                    if (user.geteMail().equals(theUser.geteMail())) {
-                        if (user.getPassword().equals(theUser.getPassword())) {
+
+                for (User user :
+                        UsersList) {
+
+
+                    if (email.equals(theUser.geteMail())) {
+                        if (password.equals(theUser.getPassword())) {
                             loggedIn = true;
-                        } else {
+                        } else if (!password.equals(theUser.getPassword())){
                             loggedIn = false;
                             System.out.println("you entered wrong password!");
                         }
@@ -73,8 +76,9 @@ public class UserList implements Serializable {
                         System.out.println("You entered wrong email!");
                     }
 
-                }
 
+
+                }
 
             } catch (UserNotFound e) {
             }
