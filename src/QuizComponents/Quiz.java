@@ -1,25 +1,30 @@
 package QuizComponents;
 
+import User.Teacher;
+
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Quiz {
 
-    public int id;
-    public int subjectId;
+    public String id;
+    public String subjectId;
     public ArrayList<Question> questionsList = new ArrayList<>();
     public String quizName;
-    public int autherId;
+    public String autherId;
+    Random random = new Random();
 
 
     public Quiz() {
     }
 
-    public Quiz(int id, int subjectId, ArrayList<Question> questionsList, String quizName, int autherId) {
-        this.id = id;
+    public Quiz(int id, String subjectId, ArrayList<Question> questionsList, String quizName, String email) {
+        this.id = String.format("%04d", random.nextInt(10000));
         this.subjectId = subjectId;
         this.questionsList = questionsList;
         this.quizName = quizName;
-        this.autherId = autherId;
+        this.autherId = email;
     }
 
 
@@ -30,11 +35,11 @@ public class Quiz {
 
     ///Getters
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public int getSubjectIdl() {
+    public String getSubjectIdl() {
         return subjectId;
     }
 
@@ -46,7 +51,7 @@ public class Quiz {
         return quizName;
     }
 
-    public int getAutherId() {
+    public String getAutherId() {
         return autherId;
     }
 
@@ -56,11 +61,11 @@ public class Quiz {
 
     ///Setters
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void setSubjectIdl(int subjectIdl) {
+    public void setSubjectIdl(String subjectIdl) {
         this.subjectId = subjectIdl;
     }
 
@@ -72,7 +77,7 @@ public class Quiz {
         this.quizName = quizName;
     }
 
-    public void setAutherId(int autherId) {
+    public void setAutherId(String autherId) {
         this.autherId = autherId;
     }
 }

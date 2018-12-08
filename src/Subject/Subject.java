@@ -14,7 +14,7 @@ public class Subject implements Serializable {
     public Subject() {
     }
 
-    public Subject(String id, String subjectName) {
+    public Subject( String subjectName) {
         this.id = String.format("%04d", random.nextInt(10000));
         this.subjectName = subjectName;
     }
@@ -49,10 +49,7 @@ public class Subject implements Serializable {
     //To string methods
     @Override
     public String toString() {
-        return "Subject{" +
-                "id=" + id +
-                ", subjectName='" + subjectName + '\'' +
-                '}';
+        return "Subject name: " + subjectName + "\n" + "Subject ID: " + id;
     }
 
 }

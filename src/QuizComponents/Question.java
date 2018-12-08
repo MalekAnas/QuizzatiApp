@@ -24,11 +24,11 @@ public class Question {
     }
 
 
-    public Question(String text, ArrayList<Option> optionList, Subject subject) {
+    public Question(String text, ArrayList<Option> optionList , Subject sub) {
         this.id = String.format("%04d", random.nextInt(10000));
         this.text = text;
         this.optionList = optionList;
-        this.subject = subject;
+        this.subject = sub;
     }
 
 

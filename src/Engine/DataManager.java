@@ -25,7 +25,7 @@ public class DataManager {
     static Menu menu = new Menu();
     static User user;
     static DataManager quizzati = new DataManager();
-    static ArrayList<Option> options;
+    static ArrayList<Option> options = new ArrayList<>();
 
     static Subject subjectOfQuestion ;
 
@@ -37,7 +37,7 @@ public class DataManager {
 
         allUsers.loadUsers();
         allUsers.toString();
-        if (allUsers.isEmailExist("malek123"))
+        if (allUsers.isEmailExist("malek32"))
             System.out.println("Exist");
         else
             System.out.println("not exist");
@@ -127,24 +127,30 @@ public class DataManager {
         boolean logged = allUsers.signIn(email, password);
 
         if (logged) {
+
+
             try {
                 user = allUsers.findUserByMail(email);
-                if (user instanceof Teacher) {
-                    menu.printSignedTeacherMenu();
-                    quizzati.performTeacherAction(getUserChoice());
-                    performTeacherAction(getUserChoice());
-                } else if (user instanceof Student) {
-                    menu.printSignedStudentMenu();
-                    quizzati.performStudentAction(getUserChoice());
-                }
 
-
-            } catch (UserNotFound notFound) {
-                System.out.println("User not found!");
             }
+            catch (UserNotFound e){System.out.println("wrong here");}
+            if (user instanceof Teacher) {
+                menu.printSignedTeacherMenu();
+                quizzati.performTeacherAction(getUserChoice());
+                performTeacherAction(getUserChoice());
+            } else if (user instanceof Student) {
+                menu.printSignedStudentMenu();
+                quizzati.performStudentAction(getUserChoice());
+            }
+        }
 
 
-        } else if (!logged) {
+
+
+
+
+
+          else if (!logged) {
             System.out.println("Failed to login!");
             quizzati.signIn();
 
@@ -157,10 +163,15 @@ public class DataManager {
             case 1:
 
                 subjects.createNewSubject();
+                subjects.viewSubjects();
+                menu.printSignedTeacherMenu();
+                quizzati.performTeacherAction(getUserChoice());
 
 
                 break;
             case 2:
+                System.out.println(subjects.viewSubjects());
+
                quizzati.addQuestion();
 
 
@@ -194,21 +205,25 @@ public class DataManager {
         String questionText = readIn.nextLine();
 
 
+        String optionTxt;
         System.out.println("Enter options:");
         for (int i = 1 ; i < 5 ; i++ ){
             System.out.println("Option " +i + ":");
-            String optionTxt = readIn.nextLine();
+            optionTxt = readIn.nextLine();
             System.out.println("Enter 1 if this option is the correct answer, 0 if false: ");
             int choice = Integer.parseInt(readIn.nextLine());
-            if (choice == 1)
+            if (choice == 1) {
                 correct = true;
+                System.out.println("correct");
+            }
             if (choice ==0 )
                 correct = false;
 
-            option = new Option(optionTxt , correct , newQuestion.getId() );
-            options.add(option);
+
+            options.add(new Option(optionTxt , correct , newQuestion.getId() ));
 
         }
+
         newQuestion.setText(questionText);
         newQuestion.setOptionList(options);
         newQuestion.setSubject(subjectOfQuestion);

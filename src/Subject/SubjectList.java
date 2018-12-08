@@ -14,26 +14,24 @@ public class SubjectList implements Serializable {
     public ArrayList<Subject> subjectsList = new ArrayList<>();
     Menu menu  = new Menu();
     boolean  idAlreadyExist;
+    String s;
 
 
     //get Subject info
     public void createNewSubject() {
 
         String subjectName = menu.creatSubjectGetName();
-        String subjectID = menu.creatSubjectGetId();
-        idAlreadyExist = checkIfSubjectExist(subjectID);
 
 
-        if (idAlreadyExist) {
-            System.out.println("This ID is already taken!");
 
-        } else if (!idAlreadyExist) {
-            Subject myNewSubject = new Subject(subjectID, subjectName);
+
+            Subject myNewSubject = new Subject( subjectName);
             subjectsList.add(myNewSubject);
+            System.out.println(myNewSubject.getSubjectName() + " has been created!\n" + "Subject Id :" + myNewSubject.getId());
             saveSubjects();
 
 
-        }
+
 
     }
 
@@ -83,6 +81,18 @@ public class SubjectList implements Serializable {
         }
 
         return foundSub;
+    }
+
+    public String viewSubjects(){
+
+        loadSubjects();
+        for (Subject subToView :
+                subjectsList) {
+           s = subToView.toString();
+
+        }
+        return  s;
+
     }
 
     public boolean checkIfSubjectExist(String newSubjectId) {

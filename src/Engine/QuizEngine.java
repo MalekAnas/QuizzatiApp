@@ -2,12 +2,16 @@ package Engine;
 
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import QuizComponents.*;
 
 public class QuizEngine extends DataManager {
 
-    public int id;
+    public String id;
     public ArrayList<QuizResult> resultList = new ArrayList<>();
+
+    Random random = new Random();
 
 
 
@@ -26,8 +30,8 @@ public class QuizEngine extends DataManager {
     public QuizEngine() {
     }
 
-    public QuizEngine(int id, ArrayList<QuizResult> resultList) {
-        this.id = id;
+    public QuizEngine(ArrayList<QuizResult> resultList) {
+        this.id = String.format("%04d", random.nextInt(10000));
         this.resultList = resultList;
     }
 
@@ -63,7 +67,7 @@ public class QuizEngine extends DataManager {
     ///Getters
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -74,7 +78,7 @@ public class QuizEngine extends DataManager {
 
 
     ///Setters
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

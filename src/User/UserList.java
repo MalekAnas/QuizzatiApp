@@ -10,20 +10,23 @@ public class UserList implements Serializable {
     public ArrayList<User> UsersList = new ArrayList<>();
     public UserType typeOfUser;
     User theUser;
-    boolean isExist;
+    boolean isExist = false;
     public enum UserType{ Student , Teacher}
+    int count=0;
 
 
 
 
     //check if email is already exist in the userlist
-    public boolean isEmailExist(String email){
+    public boolean  isEmailExist(String email){
+
 
         for (User user : UsersList) {
             if (user.geteMail().equals(email)){
                 isExist = true;
             }
-            else isExist=false;
+            //else isExist=false;
+
 
         }
         return isExist;
@@ -61,8 +64,7 @@ public class UserList implements Serializable {
                 theUser = findUserByMail(email);
 
 
-                for (User user :
-                        UsersList) {
+
 
 
                     if (email.equals(theUser.geteMail())) {
@@ -78,7 +80,7 @@ public class UserList implements Serializable {
 
 
 
-                }
+
 
             } catch (UserNotFound e) {
             }
@@ -112,11 +114,14 @@ public class UserList implements Serializable {
 
         for (User userToFind : UsersList) {
             if (userToFindEmail.equals(userToFind.geteMail())) {
-                theUser = userToFind;
-            }
-            else throw new UserNotFound("User is not registered!");
 
+                theUser = userToFind;
+
+
+            }
+//
         }
+
 
         return theUser;
 
