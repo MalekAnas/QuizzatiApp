@@ -15,7 +15,7 @@ public class QuizResult {
     public QuizResult() {
     }
 
-    public QuizResult(int id, int userId, int quizId, String date, int correctQuestions) {
+    public QuizResult(int id, int userId, int quizId,  int correctQuestions) {
         this.id = id;
         this.userId = userId;
         this.quizId = quizId;

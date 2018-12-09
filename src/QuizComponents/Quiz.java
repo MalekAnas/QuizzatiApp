@@ -1,8 +1,6 @@
 package QuizComponents;
 
-import User.Teacher;
 
-import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,8 +8,8 @@ public class Quiz {
 
     public String id;
     public String subjectId;
-    public ArrayList<Question> questionsList = new ArrayList<>();
-    public String quizName;
+
+    Question [] questionsList;
     public String autherId;
     Random random = new Random();
 
@@ -19,11 +17,10 @@ public class Quiz {
     public Quiz() {
     }
 
-    public Quiz(int id, String subjectId, ArrayList<Question> questionsList, String quizName, String email) {
+    public Quiz( String subjectId, Question [] questionsList,  String email) {
         this.id = String.format("%04d", random.nextInt(10000));
         this.subjectId = subjectId;
         this.questionsList = questionsList;
-        this.quizName = quizName;
         this.autherId = email;
     }
 
@@ -43,12 +40,8 @@ public class Quiz {
         return subjectId;
     }
 
-    public ArrayList<Question> getQuestionsList() {
+    public Question[] getQuestionsList() {
         return questionsList;
-    }
-
-    public String getQuizName() {
-        return quizName;
     }
 
     public String getAutherId() {
@@ -69,12 +62,8 @@ public class Quiz {
         this.subjectId = subjectIdl;
     }
 
-    public void setQuestionsList(ArrayList<Question> questionsList) {
+    public void setQuestionsList(Question[] questionsList) {
         this.questionsList = questionsList;
-    }
-
-    public void setQuizName(String quizName) {
-        this.quizName = quizName;
     }
 
     public void setAutherId(String autherId) {

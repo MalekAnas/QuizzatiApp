@@ -13,6 +13,7 @@ public class UserList implements Serializable {
     boolean isExist = false;
     public enum UserType{ Student , Teacher}
     int count=0;
+    String theSignedUserEmail;
 
 
 
@@ -55,6 +56,10 @@ public class UserList implements Serializable {
 
     //Sign In a user
 
+    public String getTheSignedUserEmail() {
+        return theSignedUserEmail;
+    }
+
     public boolean signIn (String email, String password){
         boolean loggedIn =false;
         loadUsers();
@@ -68,8 +73,10 @@ public class UserList implements Serializable {
 
 
                     if (email.equals(theUser.geteMail())) {
+                          theSignedUserEmail = getTheSignedUserMail(email);
                         if (password.equals(theUser.getPassword())) {
                             loggedIn = true;
+
                         } else if (!password.equals(theUser.getPassword())){
                             loggedIn = false;
                             System.out.println("you entered wrong password!");
@@ -91,7 +98,11 @@ public class UserList implements Serializable {
 
     }
 
+    public String getTheSignedUserMail(String myMail){
+        String email = myMail;
+        return email;
 
+    }
 
 
 

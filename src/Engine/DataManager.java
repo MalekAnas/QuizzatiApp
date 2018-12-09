@@ -15,6 +15,7 @@ public class DataManager {
 
     static Scanner readIn = new Scanner(System.in);
     ArrayList<Quiz> quizList = new ArrayList<>();
+    static  Quiz theQuiz ;
     static SubjectList subjects = new SubjectList();
     static UserList allUsers = new UserList();
     static Option option;
@@ -29,6 +30,8 @@ public class DataManager {
     boolean correct;
     public int answer;
     private boolean isExist;
+    int result=0;
+    int correctQuestions;
 
 
 
@@ -108,6 +111,7 @@ public class DataManager {
 
 
     public void signIn() {
+
 
         String email = menu.printSignInMailMenu();
         String password = menu.printSingInPasswordMenu();
@@ -257,7 +261,8 @@ public class DataManager {
 
             if (tempArray.size() <= 10 && tempArray.size() > 0) {
                 tempArray.toArray(tenQuesQuiz);
-            } else {
+            }
+            else {
                 for (int i = 0; i < tenQuesQuiz.length; i++) {
                     boolean exist = false;
                     do {
@@ -290,17 +295,19 @@ public class DataManager {
         }
 
 
-        else if (tempArray.size() < 5 && tempArray.size() > 0) {
-            tempArray.toArray(fiveQuesQuiz);
-            System.out.println(tempArray);}
+
 
         else {
+            if (tempArray.size() < 5 && tempArray.size() > 0) {
+                tempArray.toArray(fiveQuesQuiz);
+                System.out.println(tempArray);}
 
             for (int i = 0; i < fiveQuesQuiz.length; i++) {
                 boolean exist = false;
                 do {
                     int f = random.nextInt(tempArray.size());
                     Question tempQuestion = tempArray.get(f);
+
                     for (int j = 0; j < i; j++) {
                         if (fiveQuesQuiz[j].getId().equals(tempQuestion.getId())) {
                             exist = true;
@@ -380,15 +387,53 @@ public class DataManager {
     }
 
 
-    public void startQuiz (Question [] myquestions){
+    public Quiz startQuiz (Question [] myquestions){
 
+        int i;
         for (Question q : myquestions ) {
             System.out.println(q.getText());
+            for (i = 1; i<q.optionList.size() ; i++) {
+                System.out.println( q.optionList.get(i).getText());
+            }
+            answer = Integer.parseInt(readIn.nextLine());
+            int theCorrectOtion = findTheRightOption(options);
+
+            if (answer == theCorrectOtion){
+                result++;
+            }
+            String uEmail = allUsers.getTheSignedUserEmail();
+
+
+            String idofsub = subjectOfQuestion.getId();
+            theQuiz = new Quiz(idofsub , myquestions , uEmail);
+
+
+
+
 
 
 
         }
+        return theQuiz;
 
     }
+
+    public int findTheRightOption(ArrayList<Option> oList ){
+
+    int index = 0 ;
+        for (Option opt : oList   ) {
+            if (opt.isCorrect()){
+                index = oList.indexOf(opt);
+            }
+
+        }
+
+
+
+        return index;
+    }
+
+
+
 
 }

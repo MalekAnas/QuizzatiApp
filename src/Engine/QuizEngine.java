@@ -14,17 +14,10 @@ public class QuizEngine extends DataManager {
     Random random = new Random();
 
 
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public Quiz startQuiz(Question[] myquestions) {
+        return super.startQuiz(myquestions);
+    }
 
     ///Constructors
     public QuizEngine() {
