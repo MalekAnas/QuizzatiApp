@@ -98,6 +98,13 @@ public class Menu {
         System.out.println("--------------------------------------------------------\n\n");
     }
 
+    public void printTwoQuizesTypes(){
+        System.out.println("1)Start a 5 questions quiz.");
+        System.out.println("2)Start a 10 questions quiz.");
+
+    }
+
+
     public String creatSubjectGetName(){
         String subjectName;
         System.out.println("Enter the Subject name:");

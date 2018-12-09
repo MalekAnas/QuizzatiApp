@@ -12,7 +12,7 @@ public class QuestionsList implements Serializable {
     Question newQuestion;
     SubjectList subjects = new SubjectList();
     public ArrayList<Question> questions = new ArrayList<>();
-
+    ArrayList<Question> myQustionsForSubject;
     public void saveQuestions() {
         ObjectOutputStream obj;
         try {
@@ -28,6 +28,17 @@ public class QuestionsList implements Serializable {
     }
 
 
+    public ArrayList pickQuestionsBySubject(String subjectId){
+
+        for ( Question question    : questions
+             ) {
+            if (question.getSubjectID().equals(subjectId)){
+                myQustionsForSubject.add(question);
+            }
+
+        }
+        return myQustionsForSubject;
+    }
     public void loadQuestions() {
         ObjectInputStream obj = null;
         try {

@@ -83,15 +83,15 @@ public class SubjectList implements Serializable {
         return foundSub;
     }
 
-    public String viewSubjects(){
+    public void viewSubjects(){
 
         loadSubjects();
         for (Subject subToView :
                 subjectsList) {
-           s = subToView.toString();
+          System.out.println(subToView.toString());
 
         }
-        return  s;
+
 
     }
 

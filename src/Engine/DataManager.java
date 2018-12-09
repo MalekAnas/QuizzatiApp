@@ -1,6 +1,7 @@
 package Engine;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import Menu.*;
@@ -16,7 +17,8 @@ public class DataManager {
     ArrayList<Quiz> quizList = new ArrayList<>();
     static SubjectList subjects = new SubjectList();
     static UserList allUsers = new UserList();
-    static Option option ;
+    static Option option;
+    Random random = new Random();
 
     static Question newQuestion;
 
@@ -27,7 +29,7 @@ public class DataManager {
     static DataManager quizzati = new DataManager();
     static ArrayList<Option> options = new ArrayList<>();
 
-    static Subject subjectOfQuestion ;
+    static Subject subjectOfQuestion;
 
     boolean correct;
     private boolean isExist;
@@ -35,13 +37,10 @@ public class DataManager {
     public static void main(String[] args) {
 
 
+
+
         allUsers.loadUsers();
         allUsers.toString();
-        if (allUsers.isEmailExist("malek32"))
-            System.out.println("Exist");
-        else
-            System.out.println("not exist");
-
         menu.printFirstMenu();
         quizzati.performAction(quizzati.getUserChoice());
 
@@ -100,25 +99,12 @@ public class DataManager {
 
     public static void viewSubjects() {
 
-
-        for (int i = 0; i <= subjects.subjectsList.size(); i++) {
-            System.out.println(i + 1 + ")" + subjects.subjectsList.get(i).toString());
-
-        }
+        subjects.viewSubjects();
 
     }
 
-    public static void viewQuiz() {
 
-    }
 
-    protected static void loadData() {
-
-    }
-
-    protected static void SaveData() {
-
-    }
 
     public void signIn() {
 
@@ -132,25 +118,21 @@ public class DataManager {
             try {
                 user = allUsers.findUserByMail(email);
 
+
+            } catch (UserNotFound e) {
+                System.out.println("wrong here");
             }
-            catch (UserNotFound e){System.out.println("wrong here");}
             if (user instanceof Teacher) {
                 menu.printSignedTeacherMenu();
                 quizzati.performTeacherAction(getUserChoice());
                 performTeacherAction(getUserChoice());
             } else if (user instanceof Student) {
-                menu.printSignedStudentMenu();
+
+
+                viewSubjects();
                 quizzati.performStudentAction(getUserChoice());
             }
-        }
-
-
-
-
-
-
-
-          else if (!logged) {
+        } else if (!logged) {
             System.out.println("Failed to login!");
             quizzati.signIn();
 
@@ -170,9 +152,9 @@ public class DataManager {
 
                 break;
             case 2:
-                System.out.println(subjects.viewSubjects());
+                subjects.viewSubjects();
 
-               quizzati.addQuestion();
+                quizzati.addQuestion();
 
 
                 break;
@@ -188,13 +170,11 @@ public class DataManager {
     private void addQuestion() {
 
 
-
-
         System.out.println("Enter subject ID: ");
-        String  subID = readIn.nextLine();
+        String subID = readIn.nextLine();
         isExist = subjects.checkIfSubjectExist(subID);
         if (isExist)
-             subjectOfQuestion = subjects.findSubjectById(subID);
+            subjectOfQuestion = subjects.findSubjectById(subID);
 
 
         newQuestion = new Question();
@@ -207,8 +187,8 @@ public class DataManager {
 
         String optionTxt;
         System.out.println("Enter options:");
-        for (int i = 1 ; i < 5 ; i++ ){
-            System.out.println("Option " +i + ":");
+        for (int i = 1; i < 5; i++) {
+            System.out.println("Option " + i + ":");
             optionTxt = readIn.nextLine();
             System.out.println("Enter 1 if this option is the correct answer, 0 if false: ");
             int choice = Integer.parseInt(readIn.nextLine());
@@ -216,46 +196,43 @@ public class DataManager {
                 correct = true;
                 System.out.println("correct");
             }
-            if (choice ==0 )
+            if (choice == 0)
                 correct = false;
 
 
-            options.add(new Option(optionTxt , correct , newQuestion.getId() ));
+            options.add(new Option(optionTxt, correct, newQuestion.getId()));
 
         }
 
         newQuestion.setText(questionText);
         newQuestion.setOptionList(options);
-        newQuestion.setSubject(subjectOfQuestion);
+        newQuestion.setSubjectID(subID);
 
         questionsList.questions.add(newQuestion);
         System.out.println("Question added successfully!");
-
-
-
-
+        menu.printSignedTeacherMenu();
+        quizzati.performTeacherAction(getUserChoice());
 
 
     }
 
     private void performStudentAction(int studentChoice) {
-        switch (studentChoice) {
+        ArrayList<Question> tempArray = new ArrayList<>();
+        String subjectID = String.valueOf(studentChoice);
+        tempArray=  questionsList.pickQuestionsBySubject(subjectID);
 
+        menu.printTwoQuizesTypes();
+        int choice = getUserChoice();
+        switch (choice){
             case 1:
-                viewSubjects();
+                Question [] fiveQuesQuiz = new Question[5];
+
+
 
 
                 break;
             case 2:
-
-
                 break;
-            case 3:
-                break;
-            default:
-                break;
-
-
         }
 
 
@@ -323,7 +300,5 @@ public class DataManager {
     }
 
 
-    public void selectUserTypeSignIn() {
 
-    }
 }

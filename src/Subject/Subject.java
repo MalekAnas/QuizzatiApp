@@ -49,7 +49,7 @@ public class Subject implements Serializable {
     //To string methods
     @Override
     public String toString() {
-        return "Subject name: " + subjectName + "\n" + "Subject ID: " + id;
+        return "Subject name: " + subjectName + "\n" + "Subject ID: " + id + "\n----------------------";
     }
 
 }

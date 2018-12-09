@@ -10,7 +10,7 @@ public class Question {
     public String id;
     public String text;
     public ArrayList<Option> optionList = new ArrayList<>();
-    public Subject subject;
+    public String subjectID;
     public  int quizId;
 
     Random random = new Random();
@@ -19,16 +19,26 @@ public class Question {
     }
 
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setSubjectID(String subjectID) {
+        this.subjectID = subjectID;
+    }
+
+    public String getSubjectID() {
+        return subjectID;
+    }
+
+    public void setSubject(String subjectID) {
+        this.subjectID = subjectID;
     }
 
 
-    public Question(String text, ArrayList<Option> optionList , Subject sub) {
+
+
+    public Question(String text, ArrayList<Option> optionList , String subID) {
         this.id = String.format("%04d", random.nextInt(10000));
         this.text = text;
         this.optionList = optionList;
-        this.subject = sub;
+        this.subjectID = subID;
     }
 
 
