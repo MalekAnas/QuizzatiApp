@@ -229,19 +229,19 @@ public class DataManager {
             Question [] fiveQuesQuiz = new Question[5];
             for(int i = 0; i < tempArray.size(); i++){
                 boolean exist = false;
-                while(!exist){
+                do {
                     int f = random.nextInt(tempArray.size());
                     Question tempQuestion = tempArray.get(f);
                     for(int j = 0; j < i; j++){
-                        if(fiveQuesQuiz[j].id == tempQuestion.id){
+                        if(fiveQuesQuiz[j].getId().equals(tempQuestion.getId())){
                             exist = true;
                             break;
                         } 	
                     }
                     if(!exist){
-                        fiveQuesQuiz[i] == tempQuestion;
+                        fiveQuesQuiz[i] = tempQuestion;
                     }
-                }
+                }while(!exist);
 
             }
 
