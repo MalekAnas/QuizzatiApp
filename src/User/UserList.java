@@ -202,7 +202,7 @@ public class UserList implements Serializable {
             e1.printStackTrace();
         }
 
-        System.out.println(UsersList.size() + " Loaded");
+        System.out.println(UsersList.size() + " Users Loaded");
     }
 
     @Override

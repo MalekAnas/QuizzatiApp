@@ -1,4 +1,7 @@
 package QuizComponents;
+
+import java.util.Calendar;
+
 public class QuizResult {
 
     public int id;
@@ -7,6 +10,7 @@ public class QuizResult {
     public String date;
     public int correctQuestions;
 
+    Calendar calendar = Calendar.getInstance();
 
     public QuizResult() {
     }
@@ -15,9 +19,11 @@ public class QuizResult {
         this.id = id;
         this.userId = userId;
         this.quizId = quizId;
-        this.date = date;
+        this.date = String.valueOf(calendar.getTime());
         this.correctQuestions = correctQuestions;
     }
+
+
 
 
 

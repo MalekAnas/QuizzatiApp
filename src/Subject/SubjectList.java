@@ -49,7 +49,7 @@ public class SubjectList implements Serializable {
             e1.printStackTrace();
         }
 
-        System.out.println(subjectsList.size() + " Loaded");
+        System.out.println(subjectsList.size() + " Subjects Loaded\n---------------------");
     }
 
 

@@ -19,30 +19,33 @@ public class DataManager {
     static UserList allUsers = new UserList();
     static Option option;
     Random random = new Random();
-
     static Question newQuestion;
-
-
     static QuestionsList questionsList = new QuestionsList();
     static Menu menu = new Menu();
     static User user;
     static DataManager quizzati = new DataManager();
     static ArrayList<Option> options = new ArrayList<>();
-
     static Subject subjectOfQuestion;
-
     boolean correct;
+    public int answer;
     private boolean isExist;
+
+
+
+
+
+
 
     public static void main(String[] args) {
 
 
+        viewSubjects();
 
-
-        allUsers.loadUsers();
-        allUsers.toString();
+//
+//        allUsers.loadUsers();
+//        allUsers.toString();
         menu.printFirstMenu();
-        quizzati.performAction(quizzati.getUserChoice());
+        quizzati.performAction(getUserChoice());
 
 
     }
@@ -102,8 +105,6 @@ public class DataManager {
         subjects.viewSubjects();
 
     }
-
-
 
 
     public void signIn() {
@@ -217,40 +218,104 @@ public class DataManager {
     }
 
     private void performStudentAction(int studentChoice) {
-        ArrayList<Question> tempArray = new ArrayList<>();
+        ArrayList tempArray;
         String subjectID = String.valueOf(studentChoice);
-        tempArray=  questionsList.pickQuestionsBySubject(subjectID);
+        tempArray = questionsList.pickQuestionsBySubject(subjectID);
 
         menu.printTwoQuizesTypes();
         int choice = getUserChoice();
-        switch (choice){
+        switch (choice) {
             case 1:
 
-            Question [] fiveQuesQuiz = new Question[5];
-            for(int i = 0; i < tempArray.size(); i++){
+
+                Question[] fiveQuestionArray = CreateFiveQuestionArray(tempArray);
+
+                startQuiz(fiveQuestionArray);
+                break;
+
+
+            case 2:
+                Question[] tenQuestionArray = CreateTenQuestionArray(tempArray);
+                break;
+
+            default:
+                quizzati.performStudentAction(getUserChoice());
+        }
+
+
+    }
+
+    private Question[] CreateTenQuestionArray(ArrayList<Question> tempArray) {
+        Question[] tenQuesQuiz = new Question[10];
+        if (tempArray == null) {
+            System.out.println("Empty");
+            tenQuesQuiz = null;
+
+
+        } else {
+
+
+            if (tempArray.size() <= 10 && tempArray.size() > 0) {
+                tempArray.toArray(tenQuesQuiz);
+            } else {
+                for (int i = 0; i < tenQuesQuiz.length; i++) {
+                    boolean exist = false;
+                    do {
+                        int f = random.nextInt(tempArray.size());
+                        Question tempQuestion = tempArray.get(f);
+                        for (int j = 0; j < i; j++) {
+                            if (tenQuesQuiz[j].getId().equals(tempQuestion.getId())) {
+                                exist = true;
+                                break;
+                            }
+                        }
+                        if (!exist) {
+                            tenQuesQuiz[i] = tempQuestion;
+                        }
+                    } while (exist);
+
+
+                }
+
+
+            }
+        }
+        return tenQuesQuiz;
+    }
+
+    private Question[] CreateFiveQuestionArray(ArrayList<Question> tempArray) {
+        Question[] fiveQuesQuiz = new Question[5];
+        if (tempArray == null) {
+            System.out.println("Empty");
+        }
+
+
+        else if (tempArray.size() < 5 && tempArray.size() > 0) {
+            tempArray.toArray(fiveQuesQuiz);
+            System.out.println(tempArray);}
+
+        else {
+
+            for (int i = 0; i < fiveQuesQuiz.length; i++) {
                 boolean exist = false;
                 do {
                     int f = random.nextInt(tempArray.size());
                     Question tempQuestion = tempArray.get(f);
-                    for(int j = 0; j < i; j++){
-                        if(fiveQuesQuiz[j].getId().equals(tempQuestion.getId())){
+                    for (int j = 0; j < i; j++) {
+                        if (fiveQuesQuiz[j].getId().equals(tempQuestion.getId())) {
                             exist = true;
                             break;
-                        } 	
+                        }
                     }
-                    if(!exist){
+                    if (!exist) {
                         fiveQuesQuiz[i] = tempQuestion;
                     }
-                }while(!exist);
+                } while (exist);
+
 
             }
-
-                break;
-            case 2:
-                break;
         }
-
-
+        return fiveQuesQuiz;
     }
 
 
@@ -315,5 +380,15 @@ public class DataManager {
     }
 
 
+    public void startQuiz (Question [] myquestions){
+
+        for (Question q : myquestions ) {
+            System.out.println(q.getText());
+
+
+
+        }
+
+    }
 
 }

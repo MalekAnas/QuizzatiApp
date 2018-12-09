@@ -26,17 +26,6 @@ public class Option {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     ///Getters
 
 
@@ -57,10 +46,7 @@ public class Option {
     }
 
 
-
-
     ///Setters
-
 
 
     public void setText(String text) {
@@ -73,5 +59,11 @@ public class Option {
 
     public void setQuestionId(String questionId) {
         this.questionId = questionId;
+    }
+
+
+    @Override
+    public String toString() {
+        return text;
     }
 }
