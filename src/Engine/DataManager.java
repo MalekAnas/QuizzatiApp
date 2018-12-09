@@ -226,6 +226,9 @@ public class DataManager {
         switch (choice){
             case 1:
                 Question [] fiveQuesQuiz = new Question[5];
+                int f = random.nextInt(tempArray.size());
+                Question q1 = tempArray.get(f);
+
 
 
 
