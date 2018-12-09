@@ -225,13 +225,25 @@ public class DataManager {
         int choice = getUserChoice();
         switch (choice){
             case 1:
-                Question [] fiveQuesQuiz = new Question[5];
-                int f = random.nextInt(tempArray.size());
-                Question q1 = tempArray.get(f);
 
+            Question [] fiveQuesQuiz = new Question[5];
+            for(int i = 0; i < tempArray.size(); i++){
+                boolean exist = false;
+                while(!exist){
+                    int f = random.nextInt(tempArray.size());
+                    Question tempQuestion = tempArray.get(f);
+                    for(int j = 0; j < i; j++){
+                        if(fiveQuesQuiz[j].id == tempQuestion.id){
+                            exist = true;
+                            break;
+                        } 	
+                    }
+                    if(!exist){
+                        fiveQuesQuiz[i] == tempQuestion;
+                    }
+                }
 
-
-
+            }
 
                 break;
             case 2:
